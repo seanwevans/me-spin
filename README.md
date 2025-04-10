@@ -1,4 +1,4 @@
-# 🌀 me @spin 🌀
+# 🌀 me@spin 🌀
 
 A lightweight, single-header UTF-8 text spinner library for C.
 
