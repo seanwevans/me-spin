@@ -87,18 +87,6 @@ spinner.spinner_chars = spinners[42].glyphs;  // Use the 43rd spinner
 Or reference them by name:
 
 ```c
-// Find a spinner by name
-const char* find_spinner_by_name(const char* name) {
-  int count = sizeof(spinners) / sizeof(spinners[0]);
-  for (int i = 0; i < count; i++) {
-    if (strcmp(spinners[i].name, name) == 0) {
-      return spinners[i].glyphs;
-    }
-  }
-  return NULL;  // Not found
-}
-
-// Use it
 spinner.spinner_chars = find_spinner_by_name("CLOCK");
 ```
 
