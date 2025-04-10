@@ -162,7 +162,7 @@ The repository includes an example.c file that demonstrates the library:
 Compile and run it with:
 
 ```bash
-gcc example.c -o spinner -pthread
+gcc example.c -o spinner
 ./spinner
 ```
 
