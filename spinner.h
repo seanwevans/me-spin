@@ -566,6 +566,9 @@ static void spinner_stop(Spinner *spinner) {
 }
 
 // 🔍 Find Spinner
+#ifdef __cplusplus
+extern "C" {
+#endif
 const char *find_spinner_by_name(const char *name) {
   int count = sizeof(spinners) / sizeof(spinners[0]);
   for (int i = 0; i < count; i++) {
@@ -575,4 +578,7 @@ const char *find_spinner_by_name(const char *name) {
   }
   return NULL;
 }
+#ifdef __cplusplus
+}
+#endif
 #endif // SPINNER_H
