@@ -60,7 +60,7 @@ int main() {
 Compile with:
 
 ```bash
-gcc your_program.c -o your_program
+gcc your_program.c -o your_program -pthread
 ```
 
 ## Built-in Spinner Styles 🎨
@@ -150,7 +150,7 @@ The repository includes an example.c file that demonstrates the library:
 Compile and run it with:
 
 ```bash
-gcc example.c -o spinner
+gcc example.c -o spinner -pthread
 ./spinner
 ```
 
