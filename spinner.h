@@ -529,11 +529,11 @@ static void spinner_start(Spinner *spinner) {
   if (!spinner->show_cursor)
     hide_cursor(spinner->out);
 
+  spinner->running = 1;
   pthread_create(&spinner->tid, NULL, spinner_thread, spinner);
   // pthread_detach(spinner->tid);
 
   spinner->message = spinner->message ? strdup(spinner->message) : NULL;
-  spinner->running = 1;
 }
 
 // ⏹️ Stop Spinner
