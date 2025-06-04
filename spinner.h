@@ -429,7 +429,6 @@ static void *spinner_thread(void *arg) {
     const char *msg = s->message ? s->message : "";
     pthread_mutex_unlock(&s->lock);
 
-    int term_width = spinner_term_width;
 
     for (int j = 0; j < s->indent; j++)
       fputc(' ', s->out);
