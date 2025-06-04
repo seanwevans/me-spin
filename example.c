@@ -2,7 +2,7 @@
 
 #include "spinner.h"
 
-void simulate_proccess_for_(const unsigned sim_time_sec) {
+void simulate_process_for(const unsigned sim_time_sec) {
   sleep(sim_time_sec);
 }
 
@@ -20,19 +20,19 @@ int main() {
     spinner_start(&s);
 
     spinner_post_message(&s, "💥 Igniting the fire...");
-    simulate_proccess_for_(1);
+    simulate_process_for(1);
 
     spinner_post_message(&s, "🔥 Burning bright!");
-    simulate_proccess_for_(4);
+    simulate_process_for(4);
 
     spinner_post_message(&s, "🔥🔥 Woah!!!");
-    simulate_proccess_for_(1);
+    simulate_process_for(1);
 
     spinner_post_message(&s, "Extinguishing!");
-    simulate_proccess_for_(1);
+    simulate_process_for(1);
 
     spinner_post_message(&s, "Cooling down...");
-    simulate_proccess_for_(3);
+    simulate_process_for(3);
 
     spinner_stop(&s);
     i = (i + 1) % m;
