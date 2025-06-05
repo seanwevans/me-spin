@@ -49,7 +49,7 @@ typedef struct {
 } Spinner;
 
 static volatile sig_atomic_t spinner_term_width = 80;
-static void spinner_stop(Spinner *spinner);
+static int spinner_stop(Spinner *spinner);
 static volatile sig_atomic_t spinner_resize_requested = 0;
 static Spinner *active_spinners[MAX_ACTIVE_SPINNERS];
 static int active_spinner_count = 0;
@@ -505,9 +505,9 @@ static void spinner_post_message(Spinner *spinner, const char *new_msg) {
 }
 
 // ▶️  Start Spinner
-static void spinner_start(Spinner *spinner) {
+static int spinner_start(Spinner *spinner) {
   if (spinner->running) {
-    return;
+    return 0;
   }
   setlocale(LC_ALL, "");
   atexit(spinner_atexit_handler);
@@ -529,20 +529,25 @@ static void spinner_start(Spinner *spinner) {
     hide_cursor(spinner->out);
 
   spinner->running = 1;
-  pthread_create(&spinner->tid, NULL, spinner_thread, spinner);
+  int rc = pthread_create(&spinner->tid, NULL, spinner_thread, spinner);
+  if (rc != 0) {
+    spinner->running = 0;
+    return rc;
+  }
   // pthread_detach(spinner->tid);
 
   spinner->message = spinner->message ? strdup(spinner->message) : NULL;
+  return 0;
 }
 
 // ⏹️ Stop Spinner
-static void spinner_stop(Spinner *spinner) {
+static int spinner_stop(Spinner *spinner) {
   if (!spinner->running)
-    return;
+    return 0;
 
   spinner->running = 0;
 
-  pthread_join(spinner->tid, NULL);
+  int rc = pthread_join(spinner->tid, NULL);
 
   pthread_mutex_destroy(&spinner->lock);
   pthread_mutex_lock(&spinner_registry_lock);
@@ -562,6 +567,7 @@ static void spinner_stop(Spinner *spinner) {
 
   free(spinner->message);
   spinner->message = NULL;
+  return rc;
 }
 
 // 🔍 Find Spinner

@@ -17,7 +17,10 @@ int main() {
 
   while (1) {
     s.spinner_chars = spinners[i].glyphs;
-    spinner_start(&s);
+    if (spinner_start(&s) != 0) {
+      fprintf(stderr, "failed to start spinner\n");
+      return 1;
+    }
 
     spinner_post_message(&s, "💥 Igniting the fire...");
     simulate_proccess_for_(1);
@@ -34,7 +37,10 @@ int main() {
     spinner_post_message(&s, "Cooling down...");
     simulate_proccess_for_(3);
 
-    spinner_stop(&s);
+    if (spinner_stop(&s) != 0) {
+      fprintf(stderr, "failed to stop spinner\n");
+      return 1;
+    }
     i = (i + 1) % m;
   }
 
