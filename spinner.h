@@ -57,7 +57,7 @@ static int spinner_stop(Spinner *spinner);
 static volatile sig_atomic_t spinner_resize_requested = 0;
 static Spinner *active_spinners[MAX_ACTIVE_SPINNERS];
 static int active_spinner_count = 0;
-pthread_mutex_t spinner_registry_lock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t spinner_registry_lock = PTHREAD_MUTEX_INITIALIZER;
 
 // ⚙️⚙️ Spinners
 typedef struct {
