@@ -509,7 +509,8 @@ static void spinner_start(Spinner *spinner) {
   if (spinner->running) {
     return;
   }
-  setlocale(LC_ALL, "");
+  // Initialize locale for character classification
+  setlocale(LC_CTYPE, "");
   atexit(spinner_atexit_handler);
 
   pthread_mutex_init(&spinner->lock, NULL);
